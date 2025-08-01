@@ -31,7 +31,7 @@ services:
 
 networks:
   monitoring-net:
-    driver: bridge
+    external: true
 
 volumes:
   prometheus_data:
