@@ -1,8 +1,11 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
 scrape_configs:
-  - job_name: 'Metrics'
+  - job_name: 'spring-boot'
     metrics_path: '/actuator/prometheus'
-    scrape_interval: 3s
     static_configs:
-      - targets: ['spring-boot:8080']
+      - targets: ['host.docker.internal:8080']  # Altere para seu IP/host real
         labels:
-          application: 'Application'
+          application: 'spring-boot-app'

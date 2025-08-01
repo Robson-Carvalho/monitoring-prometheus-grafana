@@ -5,13 +5,15 @@ services:
     image: prom/prometheus
     container_name: prometheus
     volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus:/etc/prometheus
       - prometheus_data:/prometheus
     ports:
       - "9090:9090"
     restart: unless-stopped
     networks:
       - monitoring-net
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   grafana:
     image: grafana/grafana
@@ -24,6 +26,8 @@ services:
     restart: unless-stopped
     networks:
       - monitoring-net
+    depends_on:
+      - prometheus
 
 networks:
   monitoring-net:
